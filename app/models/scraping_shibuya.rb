@@ -73,7 +73,7 @@ class ScrapingShibuya
       elsif @@location == "ochanomizu"
         name = @@driver.find_element(:xpath, "//*[@id='month']/table/tbody/tr[#{num}]/th").text.sub("御茶ノ水", "").gsub(/(\s)/,"")
       elsif @@location == "expert"
-        name = @@driver.find_element(:xpath, "//*[@id='month']/table/tbody/tr[#{num}]/th").text.sub("エキスパート", "").gsub(/(\s)/,"")
+        name = @@driver.find_element(:xpath, "//*[@id='month']/table/tbody/tr[#{num}]/th").text.sub("エキスパート", "").sub("ビジネス", "").gsub(/(\s)/,"")
       end
       shibuya_mentor_name = User.where(name: name).first_or_initialize
       shibuya_mentor_name.save
