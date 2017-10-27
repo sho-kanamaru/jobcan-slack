@@ -2,7 +2,8 @@ class ScrapingShibuya
 
   def self.login_user(location)
     @@location = location
-    @@driver = Selenium::WebDriver.for :chrome
+    caps = Selenium::WebDriver::Remote::Capabilities.chrome("chromeOptions" => {binary: "/app/.apt/usr/bin/google-chrome", args: ["--headless"]})
+    @@driver = Selenium::WebDriver.for :chrome, desired_capabilities: caps
     @@driver.navigate.to 'https://ssl.jobcan.jp/login/client/?url=https%3A%2F%2Fssl.jobcan.jp%2Fclient%2F'
 
     company_id = @@driver.find_element(:id, 'client_login_id')
