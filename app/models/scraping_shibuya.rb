@@ -9,17 +9,17 @@ class ScrapingShibuya
     company_id.send_keys('div')
 
     client_manager_id = @@driver.find_element(:id, 'client_manager_login_id')
-    client_manager_id.send_keys('mentor')
+    client_manager_id.send_keys('mentors')
 
     password = @@driver.find_element(:id, 'client_login_password')
-    password.send_keys('techcamp')
+    password.send_keys('divmentors')
 
     @@driver.find_element(:xpath, '/html/body/div/div[1]/form/div[5]/button').click
     move_to_schedule_page
   end
 
   def self.move_to_schedule_page
-    e = @@driver.find_element(:xpath, '//*[@id="header"]/div[2]/div/ul/li/a')
+    e = @@driver.find_element(:xpath, '//*[@id="header"]/div[2]/div/ul/li[2]/a')
     @@driver.mouse.move_to(e) ##シフト管理ボタンにマウスオーバー
     @@driver.find_element(:xpath, '//*[@id="shift-manage-menu"]/ul/li[2]/dl/dt/a').click
 
@@ -37,6 +37,8 @@ class ScrapingShibuya
       select_group.select_by(:value, '38') ##新宿
     elsif @@location == "ochanomizu"
       select_group.select_by(:value, '41') ##御茶ノ水
+    elsif @@location == "expert"
+      select_group.select_by(:value, '42') ##エキスパート
     end
 
     select_staff = Selenium::WebDriver::Support::Select.new(@@driver.find_element(:id, 'work_kind1'))
@@ -70,6 +72,8 @@ class ScrapingShibuya
         name = @@driver.find_element(:xpath, "//*[@id='month']/table/tbody/tr[#{num}]/th").text.sub("新宿", "").gsub(/(\s)/,"")
       elsif @@location == "ochanomizu"
         name = @@driver.find_element(:xpath, "//*[@id='month']/table/tbody/tr[#{num}]/th").text.sub("御茶ノ水", "").gsub(/(\s)/,"")
+      elsif @@location == "expert"
+        name = @@driver.find_element(:xpath, "//*[@id='month']/table/tbody/tr[#{num}]/th").text.sub("エキスパート", "").gsub(/(\s)/,"")
       end
       shibuya_mentor_name = User.where(name: name).first_or_initialize
       shibuya_mentor_name.save
@@ -87,12 +91,7 @@ class ScrapingShibuya
     else
     end
     @@driver.quit
-    if @@location == "shibuya"
-      ScrapingExpert.login_user(@@location)
-    else
-      Jobcan.cooperate_with_slack(@@location)
-    end
+    Jobcan.cooperate_with_slack(@@location)
   end
-
 end
 
