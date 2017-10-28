@@ -40,12 +40,16 @@ class ScrapingShibuya
       select_group.select_by(:value, '41') ##御茶ノ水
     elsif @@location == "expert"
       select_group.select_by(:value, '42') ##エキスパート
+    elsif @@location == "umeda"
+      select_group.select_by(:value, '31') ##梅田
+    elsif @@location == "nagoya"
+      select_group.select_by(:value, '40') ##名古屋
     end
 
     select_staff = Selenium::WebDriver::Support::Select.new(@@driver.find_element(:id, 'work_kind1'))
     select_staff.select_by(:value, '3')
 
-    @@driver.find_element(:xpath, '//*[@id="search"]/table[1]/tbody/tr[2]/td/div[1]/div[2]/div/span[2]').click if Date.tomorrow.strftime("%-d").to_i == date = Date.new(Time.now.year, Time.now.month, -1).day
+    @@driver.find_element(:xpath, '//*[@id="search"]/table[1]/tbody/tr[2]/td/div[1]/div[2]/div/span[2]').click if Date.today.strftime("%-d").to_i == date = Date.new(Time.now.year, Time.now.month, -1).day
 
     @@driver.find_element(:xpath, '//*[@id="search"]/div[1]/a/div').click ##表示ボタンをクリック(デフォルトで9/1~9/30になっているため、ボタンクリックだけでOK)
     get_shift_schedule
@@ -75,6 +79,10 @@ class ScrapingShibuya
         name = @@driver.find_element(:xpath, "//*[@id='month']/table/tbody/tr[#{num}]/th").text.sub("御茶ノ水", "").gsub(/(\s)/,"")
       elsif @@location == "expert"
         name = @@driver.find_element(:xpath, "//*[@id='month']/table/tbody/tr[#{num}]/th").text.sub("エキスパート", "").sub("ビジネス", "").gsub(/(\s)/,"")
+      elsif @@location == "umeda"
+        name = @@driver.find_element(:xpath, "//*[@id='month']/table/tbody/tr[#{num}]/th").text.sub("梅田", "").gsub(/(\s)/,"")
+      elsif @@location == "nagoya"
+        name = @@driver.find_element(:xpath, "//*[@id='month']/table/tbody/tr[#{num}]/th").text.sub("名古屋", "").gsub(/(\s)/,"")
       end
       shibuya_mentor_name = User.where(name: name).first_or_initialize
       shibuya_mentor_name.save
