@@ -5,7 +5,7 @@ class Jobcan
   def self.cooperate_with_slack(location)
 
     Slack.configure do |config|
-      config.token = 'xoxb-235273604049-9NcHGJ1tyKTn57UwGkzkRCpi'
+      config.token = ENV["SLACK_TOKEN_ID"]
     end
 
     youbi = %w[日 月 火 水 木 金 土]

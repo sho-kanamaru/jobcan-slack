@@ -7,13 +7,13 @@ class ScrapingShibuya
     @@driver.navigate.to 'https://ssl.jobcan.jp/login/client/?url=https%3A%2F%2Fssl.jobcan.jp%2Fclient%2F'
 
     company_id = @@driver.find_element(:id, 'client_login_id')
-    company_id.send_keys('div')
+    company_id.send_keys(ENV["COMPANY_ID"])
 
     client_manager_id = @@driver.find_element(:id, 'client_manager_login_id')
-    client_manager_id.send_keys('mentors')
+    client_manager_id.send_keys(ENV["CLIENT_MANAGER_ID"])
 
     password = @@driver.find_element(:id, 'client_login_password')
-    password.send_keys('divmentors')
+    password.send_keys(ENV["PASSWORD"])
 
     @@driver.find_element(:xpath, '/html/body/div/div[1]/form/div[5]/button').click
     move_to_schedule_page
