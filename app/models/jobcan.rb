@@ -30,6 +30,10 @@ class Jobcan
       Slack.chat_postMessage(text: text, channel: '#jobcan-test')
     elsif location == "expert"
       Slack.chat_postMessage(text: text, channel: '#jobcan-test')
+    elsif location == "umeda"
+      Slack.chat_postMessage(text: text, channel: '#jobcan-test')
+    elsif location == "nagoya"
+      Slack.chat_postMessage(text: text, channel: '#jobcan-test')
     end
   end
 
