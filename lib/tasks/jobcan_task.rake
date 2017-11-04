@@ -1,4 +1,10 @@
 namespace :jobcan_task do
+
+  desc "全拠点のシフト"
+  task :all_group => :environment do
+    Scraping.login_user
+  end
+
   desc "渋谷校のシフト"
   task :shibuya => :environment do
     ScrapingShibuya.login_user("shibuya")
