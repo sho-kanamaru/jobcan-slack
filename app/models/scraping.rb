@@ -37,10 +37,6 @@ class Scraping
     select_group.select_by(:value, '30')
     @@location = "shibuya"
 
-    select_staff = Selenium::WebDriver::Support::Select.new(@@driver.find_element(:id, 'work_kind1'))
-    select_staff.select_by(:value, '3')
-
-
     @@driver.find_element(:xpath, '//*[@id="with_child_groups"]').click
 
     @@driver.find_element(:xpath, '//*[@id="search"]/table[1]/tbody/tr[2]/td/div[1]/div[2]/div/span[2]').click if Date.today.strftime("%-d").to_i == date = Date.new(Time.now.year, Time.now.month, -1).day
@@ -123,7 +119,7 @@ class Scraping
           Shift.create(time: time, user_id: mentor_name.id, location: "shinjuku")
         elsif shift_type[0] == "(ochanomizu 御茶ノ水)"
           Shift.create(time: time, user_id: mentor_name.id, location: "ochanomizu")
-        elsif shift_type[0] == "(tokyo 東京)"
+        elsif shift_type[0] == "(tokyo 東京駅前)"
           Shift.create(time: time, user_id: mentor_name.id, location: "tokyo")
         elsif shift_type[0] == "(waseda 早稲田)"
           Shift.create(time: time, user_id: mentor_name.id, location: "waseda")
