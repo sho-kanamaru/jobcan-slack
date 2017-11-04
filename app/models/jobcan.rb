@@ -64,7 +64,7 @@ class Jobcan
     tomorrow_mentor_lists.each do |mentor|
       text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
     end
-    Slack.chat_postMessage(text: text, channel: '#jobcan-test')
+    Slack.chat_postMessage(text: text, channel: '#shift_remind_shibuya')
 
     groups.each do |group|
       text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\n\n"
