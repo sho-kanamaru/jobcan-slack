@@ -64,7 +64,14 @@ class Jobcan
     tomorrow_mentor_lists.each do |mentor|
       text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
     end
-    Slack.chat_postMessage(text: text, channel: '#shift_remind_shibuya')
+
+    text << "\nエキスパート\n"
+    tomorrow_mentor_lists = Shift.where(location: "expert")
+    tomorrow_mentor_lists.each do |mentor|
+      text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
+    end
+
+    Slack.chat_postMessage(text: text, channel: '#jobcan-test')
 
     groups.each do |group|
       text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\n\n"
@@ -81,8 +88,6 @@ class Jobcan
       elsif group == "shinjuku"
         Slack.chat_postMessage(text: text, channel: '#jobcan-test')
       elsif group == "ochanomizu"
-        Slack.chat_postMessage(text: text, channel: '#jobcan-test')
-      elsif group == "expert"
         Slack.chat_postMessage(text: text, channel: '#jobcan-test')
       elsif group == "umeda"
         Slack.chat_postMessage(text: text, channel: '#jobcan-test')
