@@ -47,25 +47,25 @@ class Jobcan
     groups = ["waseda", "tokyo", "ikebukuro", "shinjuku", "ochanomizu", "expert", "umeda", "nagoya"]
 
     text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\n\n"
-    text << "Rails\n"
+    text << "*Rails*\n"
     tomorrow_mentor_lists = Shift.where(location: "shibuya")
     tomorrow_mentor_lists.each do |mentor|
       text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
     end
 
-    text << "\nVR\n"
+    text << "\n*VR*\n"
     tomorrow_mentor_lists = Shift.where(location: "vr")
     tomorrow_mentor_lists.each do |mentor|
       text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
     end
 
-    text << "\nAI\n"
+    text << "\n*AI*\n"
     tomorrow_mentor_lists = Shift.where(location: "ai")
     tomorrow_mentor_lists.each do |mentor|
       text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
     end
 
-    text << "\nエキスパート\n"
+    text << "\n*エキスパート*\n"
     tomorrow_mentor_lists = Shift.where(location: "expert")
     tomorrow_mentor_lists.each do |mentor|
       text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
