@@ -106,7 +106,7 @@ class Jobcan
       text << "#{mentor.user.name}(<#{mentor.user.mention_exp}>) #{mentor.time}\n"
     end
 
-    system("curl -X POST -H 'Content-type: application/json' --data '{" + '"text":"' + "#{text}" + '"}' + "'" +  " https://hooks.slack.com/services/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")
+    system("curl -X POST -H 'Content-type: application/json' --data '{" + '"text":"' + "#{text}" + '"}' + "'" +  " https://hooks.slack.com/services/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")
   end
 
 end
