@@ -154,9 +154,11 @@ class Scraping
             Shift.create(time: time, user_id: mentor_name.id, location: @@location)
           end
         else
+          number = 0
           shift_type.each do |type|
-            if type == "rails" || type == "brf面談" || type == "(training 研修事業部)"
-              Shift.create(time: time, user_id: mentor_name.id, location: @@location)
+            if type == "rails" || type == "brf面談" || type == "(training 研修事業部)" || type == "NPS" || type == ""
+              Shift.create(time: time, user_id: mentor_name.id, location: @@location) if number == 0
+              number += 1
             elsif type == "(shibuya 渋谷)"
               Shift.create(time: time, user_id: mentor_name.id, location: "shibuya")
             elsif type == "(ai AIグループ)"
