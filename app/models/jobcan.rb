@@ -65,13 +65,7 @@ class Jobcan
       text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
     end
 
-    text << "\n*エキスパート*\n"
-    tomorrow_mentor_lists = Shift.where(location: "expert")
-    tomorrow_mentor_lists.each do |mentor|
-      text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
-    end
-
-    Slack.chat_postMessage(text: text, channel: '#shift_remind_shibuya')
+    Slack.chat_postMessage(text: text, channel: '#jobcan-test')
 
     groups.each do |group|
       text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\n\n"
@@ -95,6 +89,23 @@ class Jobcan
         Slack.chat_postMessage(text: text, channel: '#jobcan-test')
       end
     end
+  end
+
+  def self.test
+    Slack.configure do |config|
+      config.token = ENV["SLACK_TOKEN_ID_EXP"]
+    end
+
+    youbi = %w[日 月 火 水 木 金 土]
+
+    text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\n\n"
+
+    tomorrow_mentor_lists = Shift.where(location: "expert")
+    tomorrow_mentor_lists.each do |mentor|
+      text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
+    end
+
+    Slack.chat_postMessage(text: text, channel: '#jobcan_test2')
   end
 
 end
