@@ -89,10 +89,10 @@ class Jobcan
         Slack.chat_postMessage(text: text, channel: '#jobcan-test')
       end
     end
-    Jobcan.test
+    Jobcan.sending_slack_exp
   end
 
-  def self.test
+  def self.sending_slack_exp
     Slack.configure do |config|
       config.token = ENV["SLACK_TOKEN_ID_EXP"]
     end
@@ -103,7 +103,7 @@ class Jobcan
 
     tomorrow_mentor_lists = Shift.where(location: "expert")
     tomorrow_mentor_lists.each do |mentor|
-      text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
+      text << "#{mentor.user.name}(<#{mentor.user.mention_exp}>) #{mentor.time}\n"
     end
 
     Slack.chat_postMessage(text: text, channel: '#jobcan_test2')
