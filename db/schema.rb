@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170906135054) do
+ActiveRecord::Schema.define(version: 20171107031054) do
 
   create_table "shifts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20170906135054) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "mention"
+    t.string "mention_exp"
   end
 
   add_foreign_key "shifts", "users"
