@@ -89,6 +89,7 @@ class Jobcan
         Slack.chat_postMessage(text: text, channel: '#jobcan-test')
       end
     end
+    Jobcan.test
   end
 
   def self.test
