@@ -109,4 +109,21 @@ class Jobcan
     Slack.chat_postMessage(text: text, channel: '#G2GAHJJ13')
   end
 
+  def self.test
+    Slack.configure do |config|
+      config.token = "xoxb-268011350194-w2Dvxd23Ef7Vat90JKkwlGqc"
+    end
+
+    youbi = %w[日 月 火 水 木 金 土]
+
+    text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\n\n"
+
+    tomorrow_mentor_lists = Shift.where(location: "expert")
+    tomorrow_mentor_lists.each do |mentor|
+      text << "#{mentor.user.name}(<#{mentor.user.mention_exp}>) #{mentor.time}\n"
+    end
+
+    system("curl -X POST -H 'Content-type: application/json' --data '{" + '"text":"' + "#{text}" + '"}' + "'" +  " https://hooks.slack.com/services/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")
+  end
+
 end
