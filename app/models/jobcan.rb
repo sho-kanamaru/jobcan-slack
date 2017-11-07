@@ -106,7 +106,7 @@ class Jobcan
       text << "#{mentor.user.name}(<#{mentor.user.mention_exp}>) #{mentor.time}\n"
     end
 
-    Slack.chat_postMessage(text: text, channel: '#mentors')
+    Slack.chat_postMessage(text: text, channel: '#G2GAHJJ13')
   end
 
 end
