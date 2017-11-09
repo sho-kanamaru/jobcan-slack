@@ -142,7 +142,7 @@ class Scraping
             Shift.create(time: time, user_id: mentor_name.id, location: "shinjuku")
           elsif shift_type[0] == "(ochanomizu 御茶ノ水)"
             Shift.create(time: time, user_id: mentor_name.id, location: "ochanomizu")
-          elsif shift_type[0] == "(tokyo 東京)"
+          elsif shift_type[0] == "(tokyo 東京駅前)"
             Shift.create(time: time, user_id: mentor_name.id, location: "tokyo")
           elsif shift_type[0] == "(waseda 早稲田)"
             Shift.create(time: time, user_id: mentor_name.id, location: "waseda")
@@ -173,7 +173,7 @@ class Scraping
               Shift.create(time: time, user_id: mentor_name.id, location: "shinjuku")
             elsif type == "(ochanomizu 御茶ノ水)"
               Shift.create(time: time, user_id: mentor_name.id, location: "ochanomizu")
-            elsif type == "(tokyo 東京)"
+            elsif type == "(tokyo 東京駅前)"
               Shift.create(time: time, user_id: mentor_name.id, location: "tokyo")
             elsif type == "(waseda 早稲田)"
               Shift.create(time: time, user_id: mentor_name.id, location: "waseda")
