@@ -43,10 +43,12 @@ class Jobcan
       config.token = ENV["SLACK_TOKEN_ID"]
     end
 
+    myname = User.find(80)
+
     youbi = %w[日 月 火 水 木 金 土]
     groups = ["waseda", "tokyo", "ikebukuro", "shinjuku", "ochanomizu", "expert", "umeda", "nagoya"]
 
-    text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\nメンションを飛ばすように設定したい人は <#{@kanamaru-sho}>までDMをしてください\n\n"
+    text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\nメンションを飛ばすように設定したい人は <#{myname.mention}>までDMをしてください\n\n"
     text << "*Rails*\n"
     tomorrow_mentor_lists = Shift.where(location: "shibuya")
     tomorrow_mentor_lists.each do |mentor|
