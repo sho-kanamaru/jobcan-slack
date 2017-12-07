@@ -48,7 +48,7 @@ class Jobcan
     youbi = %w[日 月 火 水 木 金 土]
     groups = ["waseda", "tokyo", "ikebukuro", "shinjuku", "ochanomizu", "expert", "umeda", "nagoya"]
 
-    text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\nメンションを飛ばすように設定したい人は <#{myname.mention}>までDMをしてください\n\n"
+    text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\nメンションを飛ばすように設定したい人は<#{myname.mention}>までDMをしてください。\n\n"
     text << "*Rails*\n"
     tomorrow_mentor_lists = Shift.where(location: "shibuya")
     tomorrow_mentor_lists.each do |mentor|
@@ -67,7 +67,7 @@ class Jobcan
       text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
     end
 
-    Slack.chat_postMessage(text: text, channel: '#jobcan-test')
+    Slack.chat_postMessage(text: text, channel: '#techcamp-shibuya')
 
     groups.each do |group|
       text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\n\n"
@@ -91,7 +91,7 @@ class Jobcan
         Slack.chat_postMessage(text: text, channel: '#jobcan-test')
       end
     end
-    # Jobcan.sending_slack_exp
+    Jobcan.sending_slack_exp
   end
 
   def self.sending_slack_exp
@@ -99,16 +99,18 @@ class Jobcan
       config.token = ENV["SLACK_TOKEN_ID_EXP"]
     end
 
+    myname = User.find(80)
+
     youbi = %w[日 月 火 水 木 金 土]
 
-    text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\n\n"
+    text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\nメンションを飛ばすように設定したい人は<#{myname.mention_exp}>までDMをしてください。\n\n"
 
     tomorrow_mentor_lists = Shift.where(location: "expert")
     tomorrow_mentor_lists.each do |mentor|
       text << "#{mentor.user.name}(<#{mentor.user.mention_exp}>) #{mentor.time}\n"
     end
 
-    # system("curl -X POST -H 'Content-type: application/json' --data '{" + '"text":"' + "#{text}" + '"}' + "'" +  " https://hooks.slack.com/services/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")
+    system("curl -X POST -H 'Content-type: application/json' --data '{" + '"text":"' + "#{text}" + '"}' + "'" +  " https://hooks.slack.com/services/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")
   end
 
 end
