@@ -70,23 +70,23 @@ class Jobcan
     Slack.chat_postMessage(text: text, channel: '#techcamp-shibuya')
 
     groups.each do |group|
-      text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\n\n"
+      text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\nメンションを飛ばすように設定したい人は<#{myname.mention}>までDMをしてください。\n\n"
       tomorrow_mentor_lists = Shift.where(location: group)
       tomorrow_mentor_lists.each do |mentor|
         text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
       end
       if group == "waseda"
-        Slack.chat_postMessage(text: text, channel: '#jobcan-test')
+        Slack.chat_postMessage(text: text, channel: '#techcamp-waseda')
       elsif group == "tokyo"
         Slack.chat_postMessage(text: text, channel: '#jobcan-test')
       elsif group == "ikebukuro"
-        Slack.chat_postMessage(text: text, channel: '#jobcan-test')
+        Slack.chat_postMessage(text: text, channel: '#techcamp-ikebukuro')
       elsif group == "shinjuku"
         Slack.chat_postMessage(text: text, channel: '#jobcan-test')
       elsif group == "ochanomizu"
-        Slack.chat_postMessage(text: text, channel: '#jobcan-test')
+        Slack.chat_postMessage(text: text, channel: '#techcamp-ochanomizu')
       elsif group == "umeda"
-        Slack.chat_postMessage(text: text, channel: '#jobcan-test')
+        Slack.chat_postMessage(text: text, channel: '#techcamp-umeda')
       elsif group == "nagoya"
         Slack.chat_postMessage(text: text, channel: '#jobcan-test')
       end
