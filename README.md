@@ -23,12 +23,27 @@ enum location: %w(shibuya vr ai waseda tokyo ikebukuro shinjuku ochanomizu exper
 |user_id|integer|null:false,unique|-|
 
 
-jobcanからスクレイピングするファイル
+## ファイル説明
+
+jobcanからスクレイピングするファイル:
 ```
 app/model/scraping.rb
 ```
 
-slackAPIを叩いてslackにシフト情報を流すファイル
+slackAPIを叩いてslackにシフト情報を流すファイル:
 ```
 app/model/jobcan.rb
 ```
+
+## rakeタスク実行
+
+全拠点のシフト:
+```
+rake jobcan_task:all_group
+```
+
+各拠点のシフト:
+```
+rake jobcan_task:"拠点名"
+```
+
