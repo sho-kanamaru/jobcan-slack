@@ -81,32 +81,6 @@ class Scraping
     get_shift_schedule
   end
 
-  def self.change_group(group)
-    @@count += 1
-    select_group = Selenium::WebDriver::Support::Select.new(@@driver.find_element(:id, 'group_id'))
-    if group == "vr"
-      select_group.select_by(:value, '43') ##VR
-    elsif group == "waseda"
-      select_group.select_by(:value, '33') ##早稲田
-    elsif group == "tokyo"
-      select_group.select_by(:value, '36') ##東京駅前
-    elsif group == "ikebukuro"
-      select_group.select_by(:value, '37') ##池袋
-    elsif group == "shinjuku"
-      select_group.select_by(:value, '38') ##新宿
-    elsif group == "ochanomizu"
-      select_group.select_by(:value, '41') ##御茶ノ水
-    elsif group == "expert"
-      select_group.select_by(:value, '42') ##エキスパート
-    elsif group == "umeda"
-      select_group.select_by(:value, '31') ##梅田
-    elsif group == "nagoya"
-      select_group.select_by(:value, '40') ##名古屋
-    end
-    @@location = group
-    @@driver.find_element(:xpath, '//*[@id="search"]/div[1]/a/div').click ##表示ボタンをクリック
-    get_shift_schedule
-  end
   def self.get_shift_schedule
     begin
       @@driver.find_element(:xpath, "//*[@id='shift-list']/tr[3]")
