@@ -27,7 +27,7 @@ jobcanからスクレイピングするファイル
 ```
 app/model/scraping.rb
 ```
-　
+
 slackAPIを叩いてslackにシフト情報を流すファイル
 ```
 app/model/jobcan.rb
