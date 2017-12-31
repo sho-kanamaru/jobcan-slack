@@ -44,6 +44,11 @@ class Scraping
       select_month.select_by(:value, (Date.today >> 1).month.to_s) #追加
     end
 
+    if Date.today.strftime("%-d").to_i == Date.new(Time.now.year, Time.now.month, -1).day && Date.today.strftime("%-m").to_i == 12
+      select_date = Selenium::WebDriver::Support::Select.new(@@driver.find_element(:name, 'from[day2][y]')) #追加
+      select_date.select_by(:value, "#{Date.tomorrow.year}") #追加
+    end
+
     @@driver.find_element(:xpath, '//*[@id="search"]/div[1]/a/div').click ##表示ボタンをクリック(デフォルトで9/1~9/30になっているため、ボタンクリックだけでOK)
     get_shift_schedule
   end

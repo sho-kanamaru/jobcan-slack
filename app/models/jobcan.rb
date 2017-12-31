@@ -67,7 +67,7 @@ class Jobcan
       text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
     end
 
-    Slack.chat_postMessage(text: text, channel: '#techcamp-shibuya')
+    Slack.chat_postMessage(text: text, channel: '##jobcan-test')
 
     groups.each do |group|
       text = "【リマインダー】#{DateTime.tomorrow.year}/#{DateTime.tomorrow.month}/#{DateTime.tomorrow.day}(#{youbi[DateTime.tomorrow.wday]})\nこちらにメンションがついている `明日シフトの方は今日23時までに必ず本通知にリアクション` をお願いします。\nメンションを飛ばすように設定したい人は<#{myname.mention}>までDMをしてください。\n\n"
@@ -76,22 +76,22 @@ class Jobcan
         text << "#{mentor.user.name}(<#{mentor.user.mention}>) #{mentor.time}\n"
       end
       if group == "waseda"
-        Slack.chat_postMessage(text: text, channel: '#techcamp-waseda')
+        Slack.chat_postMessage(text: text, channel: '##jobcan-test')
       elsif group == "tokyo"
         Slack.chat_postMessage(text: text, channel: '#jobcan-test')
       elsif group == "ikebukuro"
-        Slack.chat_postMessage(text: text, channel: '#techcamp-ikebukuro')
+        Slack.chat_postMessage(text: text, channel: '##jobcan-test')
       elsif group == "shinjuku"
         Slack.chat_postMessage(text: text, channel: '#jobcan-test')
       elsif group == "ochanomizu"
-        Slack.chat_postMessage(text: text, channel: '#techcamp-ochanomizu')
+        Slack.chat_postMessage(text: text, channel: '##jobcan-test')
       elsif group == "umeda"
-        Slack.chat_postMessage(text: text, channel: '#techcamp-umeda')
+        Slack.chat_postMessage(text: text, channel: '##jobcan-test')
       elsif group == "nagoya"
         Slack.chat_postMessage(text: text, channel: '#jobcan-test')
       end
     end
-    Jobcan.sending_slack_exp
+    # Jobcan.sending_slack_exp
   end
 
   def self.sending_slack_exp
