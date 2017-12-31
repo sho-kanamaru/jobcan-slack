@@ -1,24 +1,34 @@
-# README
+==シフトリマインダー
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# データベース設計
+## users table
+has_many :shifts
 
-Things you may want to cover:
+|column|type|constraint|index|
+|:---:|:---:|:---:|:---:|
+|name|string|-|-|
+|mention|string|-|-|
+|mention_exp|string|-|-|
 
-* Ruby version
+## shifts table
+belongs_to :user
 
-* System dependencies
+enum location: %w(shibuya vr ai waseda tokyo ikebukuro shinjuku ochanomizu expert umeda nagoya)
 
-* Configuration
+|column|type|constraint|index|
+|:---:|:---:|:---:|:---:|
+|date|string|-|-|
+|time|string|-|-|
+|location|integer|-|-|
+|user_id|integer|null:false,unique|-|
 
-* Database creation
 
-* Database initialization
+```
+app/model/scraping.rb
+```
+jobcanからスクレイピングするファイル
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+app/model/jobcan.rb
+```
+slackAPIを叩いてslackにシフト情報を流すファイル
