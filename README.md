@@ -1,7 +1,7 @@
-==シフトリマインダー
+# シフトリマインダー
 
-# データベース設計
-## users table
+## データベース設計
+### users table
 has_many :shifts
 
 |column|type|constraint|index|
@@ -10,7 +10,7 @@ has_many :shifts
 |mention|string|-|-|
 |mention_exp|string|-|-|
 
-## shifts table
+### shifts table
 belongs_to :user
 
 enum location: %w(shibuya vr ai waseda tokyo ikebukuro shinjuku ochanomizu expert umeda nagoya)
@@ -23,12 +23,12 @@ enum location: %w(shibuya vr ai waseda tokyo ikebukuro shinjuku ochanomizu exper
 |user_id|integer|null:false,unique|-|
 
 
+jobcanからスクレイピングするファイル
 ```
 app/model/scraping.rb
 ```
-jobcanからスクレイピングするファイル
-
+　
+slackAPIを叩いてslackにシフト情報を流すファイル
 ```
 app/model/jobcan.rb
 ```
-slackAPIを叩いてslackにシフト情報を流すファイル
