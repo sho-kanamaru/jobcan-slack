@@ -32,8 +32,7 @@ class Scraping
     select_type.select_by(:value, 'day2') #追加
 
     select_date = Selenium::WebDriver::Support::Select.new(@@driver.find_element(:name, 'from[day2][d]')) #追加
-    #select_date.select_by(:value, "#{Date.tomorrow.day}") #追加
-    select_date.select_by(:value, "19") #追加
+    select_date.select_by(:value, "#{Date.tomorrow.day}") #追加
 
     select_group.select_by(:value, '30')
     @@location = "shibuya"
