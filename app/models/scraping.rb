@@ -3,7 +3,7 @@ class Scraping
   def self.login_user
     Shift.delete_all
     @@count = 0
-    @@group_list = ["vr", "waseda", "tokyo", "ikebukuro", "shinjuku", "ochanomizu", "expert", "umeda", "nagoya", "ios"]
+    @@group_list = ["vr", "waseda", "tokyo", "ikebukuro", "shinjuku", "ochanomizu", "expert", "umeda", "nagoya", "ios", "ai"]
     caps = Selenium::WebDriver::Remote::Capabilities.chrome("chromeOptions" => {binary: "/app/.apt/usr/bin/google-chrome", args: ["--headless"]})
     @@driver = Selenium::WebDriver.for :chrome, desired_capabilities: caps
     @@driver.navigate.to 'https://ssl.jobcan.jp/login/client/?url=https%3A%2F%2Fssl.jobcan.jp%2Fclient%2F'
@@ -77,6 +77,8 @@ class Scraping
       select_group.select_by(:value, '40') ##名古屋
     elsif group == "ios"
       select_group.select_by(:value, '71') ##ios
+    elsif group == "ai"
+      select_group.select_by(:value, '69') ##ai
     end
     @@location = group
 
@@ -178,7 +180,7 @@ class Scraping
       alert = @@driver.switch_to.alert
       alert.accept
     end
-    if @@count < 10
+    if @@count < 11
       change_group(@@group_list[@@count])
     else
       @@driver.quit
