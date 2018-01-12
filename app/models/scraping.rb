@@ -32,7 +32,8 @@ class Scraping
     select_type.select_by(:value, 'day2') #追加
 
     select_date = Selenium::WebDriver::Support::Select.new(@@driver.find_element(:name, 'from[day2][d]')) #追加
-    select_date.select_by(:value, "#{Date.tomorrow.day}") #追加
+    #select_date.select_by(:value, "#{Date.tomorrow.day}") #追加
+    select_date.select_by(:value, "19") #追加
 
     select_group.select_by(:value, '30')
     @@location = "shibuya"
@@ -115,7 +116,7 @@ class Scraping
             Shift.create(time: time, user_id: mentor_name.id, location: "ai")
           elsif shift_type[0] == "(expert エキスパート)"
             Shift.create(time: time, user_id: mentor_name.id, location: "expert")
-          elsif shift_type[0] == "VR" || "(vr VR)"
+          elsif shift_type[0] == "VR" || shift_type[0] == "(vr VR)"
             Shift.create(time: time, user_id: mentor_name.id, location: "vr")
           elsif shift_type[0] == "(ikebukuro 池袋)"
             Shift.create(time: time, user_id: mentor_name.id, location: "ikebukuro")
@@ -131,7 +132,7 @@ class Scraping
             Shift.create(time: time, user_id: mentor_name.id, location: "nagoya")
           elsif shift_type[0] == "(umeda 梅田)"
             Shift.create(time: time, user_id: mentor_name.id, location: "umeda")
-          elsif shift_type[0] == "ios" || "(ios ios)"
+          elsif shift_type[0] == "ios" || shift_type[0] == "(ios ios)"
             Shift.create(time: time, user_id: mentor_name.id, location: "ios")
           else
             Shift.create(time: time, user_id: mentor_name.id, location: @@location)
@@ -148,7 +149,7 @@ class Scraping
               Shift.create(time: time, user_id: mentor_name.id, location: "ai")
             elsif type == "(expert エキスパート)"
               Shift.create(time: time, user_id: mentor_name.id, location: "expert")
-            elsif type == "VR"
+            elsif type == "VR" || type == "(vr VR)"
               Shift.create(time: time, user_id: mentor_name.id, location: "vr")
             elsif type == "(ikebukuro 池袋)"
               Shift.create(time: time, user_id: mentor_name.id, location: "ikebukuro")
@@ -164,7 +165,7 @@ class Scraping
               Shift.create(time: time, user_id: mentor_name.id, location: "nagoya")
             elsif type == "(umeda 梅田)"
               Shift.create(time: time, user_id: mentor_name.id, location: "umeda")
-            elsif type == "ios" || "(ios ios)"
+            elsif type == "ios" || type == "(ios ios)"
               Shift.create(time: time, user_id: mentor_name.id, location: "ios")
             else
               Shift.create(time: time, user_id: mentor_name.id, location: @@location)
