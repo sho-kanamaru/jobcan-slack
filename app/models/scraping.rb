@@ -3,7 +3,7 @@ class Scraping
   def self.login_user
     Shift.delete_all
     @@count = 0
-    @@group_list = ["vr", "waseda", "tokyo", "ikebukuro", "shinjuku", "ochanomizu", "expert", "umeda", "nagoya"]
+    @@group_list = ["vr", "waseda", "tokyo", "ikebukuro", "shinjuku", "ochanomizu", "expert", "umeda", "nagoya", "ios"]
     caps = Selenium::WebDriver::Remote::Capabilities.chrome("chromeOptions" => {binary: "/app/.apt/usr/bin/google-chrome", args: ["--headless"]})
     @@driver = Selenium::WebDriver.for :chrome, desired_capabilities: caps
     @@driver.navigate.to 'https://ssl.jobcan.jp/login/client/?url=https%3A%2F%2Fssl.jobcan.jp%2Fclient%2F'
@@ -74,6 +74,8 @@ class Scraping
       select_group.select_by(:value, '31') ##梅田
     elsif group == "nagoya"
       select_group.select_by(:value, '40') ##名古屋
+    elsif group == "ios"
+      select_group.select_by(:value, '71') ##ios
     end
     @@location = group
 
@@ -113,7 +115,7 @@ class Scraping
             Shift.create(time: time, user_id: mentor_name.id, location: "ai")
           elsif shift_type[0] == "(expert エキスパート)"
             Shift.create(time: time, user_id: mentor_name.id, location: "expert")
-          elsif shift_type[0] == "VR"
+          elsif shift_type[0] == "VR" || "(vr VR)"
             Shift.create(time: time, user_id: mentor_name.id, location: "vr")
           elsif shift_type[0] == "(ikebukuro 池袋)"
             Shift.create(time: time, user_id: mentor_name.id, location: "ikebukuro")
@@ -129,6 +131,8 @@ class Scraping
             Shift.create(time: time, user_id: mentor_name.id, location: "nagoya")
           elsif shift_type[0] == "(umeda 梅田)"
             Shift.create(time: time, user_id: mentor_name.id, location: "umeda")
+          elsif shift_type[0] == "ios" || "(ios ios)"
+            Shift.create(time: time, user_id: mentor_name.id, location: "ios")
           else
             Shift.create(time: time, user_id: mentor_name.id, location: @@location)
           end
@@ -160,6 +164,8 @@ class Scraping
               Shift.create(time: time, user_id: mentor_name.id, location: "nagoya")
             elsif type == "(umeda 梅田)"
               Shift.create(time: time, user_id: mentor_name.id, location: "umeda")
+            elsif type == "ios" || "(ios ios)"
+              Shift.create(time: time, user_id: mentor_name.id, location: "ios")
             else
               Shift.create(time: time, user_id: mentor_name.id, location: @@location)
             end
