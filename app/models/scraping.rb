@@ -178,7 +178,7 @@ class Scraping
       alert = @@driver.switch_to.alert
       alert.accept
     end
-    if @@count < 9
+    if @@count < 10
       change_group(@@group_list[@@count])
     else
       @@driver.quit
