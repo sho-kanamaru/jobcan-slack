@@ -84,7 +84,7 @@ class Jobcan
       if group == "waseda"
         Slack.chat_postMessage(text: text, channel: '#techcamp-waseda')
       elsif group == "tokyo"
-        Slack.chat_postMessage(text: text, channel: '#jobcan-test')
+        Slack.chat_postMessage(text: text, channel: '#techcamp-tokyo_st')
       elsif group == "ikebukuro"
         Slack.chat_postMessage(text: text, channel: '#techcamp-ikebukuro')
       elsif group == "shinjuku"
