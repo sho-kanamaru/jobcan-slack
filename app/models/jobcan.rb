@@ -43,7 +43,7 @@ class Jobcan
       config.token = ENV["SLACK_TOKEN_ID"]
     end
 
-    myname = User.find(80)
+    myname = User.find(491)
 
     youbi = %w[日 月 火 水 木 金 土]
     groups = ["waseda", "tokyo", "ikebukuro", "shinjuku", "ochanomizu", "expert", "umeda", "nagoya", "ios"]
@@ -105,7 +105,7 @@ class Jobcan
       config.token = ENV["SLACK_TOKEN_ID_EXP"]
     end
 
-    myname = User.find(80)
+    myname = User.find(491)
 
     youbi = %w[日 月 火 水 木 金 土]
 
